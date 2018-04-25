@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="  
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd  
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd  
+        http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd  
+        http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd"
+	default-lazy-init="false">
+   
+  <!--  定时推送数据到solr -->
+    <bean id="solrSynNewJob" class="com.whty.quartz.SolrSynNewJob"></bean>
+     <!--定时删除文件 -->
+     <bean id="deleteFileJob" class="com.whty.quartz.DeleteFileJob"></bean>
+     <!--批量插入数据 -->
+      <bean id="job_CNZZ" class="com.whty.quartz.CnzzFlowJob"></bean>
+      <!--抓取网页数据 -->
+      <bean id="job_grabe" class="com.whty.quartz.SelectCourseQuartzJob"></bean>
+      <!--多线程处理日志 -->
+      <bean id="log_job" class="com.whty.quartz.LogTransferSynJob"></bean>
+      
+    <!-- 配置任务线性池 -->  
+    <task:executor id="executor" pool-size="10" />
+    <task:scheduler id="scheduler" pool-size="10"/> 
+
+    <task:annotation-driven executor="executor" scheduler="scheduler" />
+    
+    <task:scheduled-tasks scheduler="scheduler">
+         <task:scheduled ref="job_grabe" method="run" cron="${jobGrabe.run.cron.expression}"></task:scheduled>
+         <task:scheduled ref="deleteFileJob" method="run" cron="${deleteFileJob.run.cron.expression}"></task:scheduled> 
+    </task:scheduled-tasks>
+    
+</beans>

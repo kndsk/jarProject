@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd " 
+	default-autowire="byName" default-lazy-init="true"> 
+	
+	
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="locations">
+			<list>
+				<value>classpath*:config/jdbc.properties</value> 
+				<value>classpath*:config/mongodb.properties</value>
+				<value>classpath*:config/quartz.properties</value>
+				<value>classpath*:config/solr.properties</value>
+				<value>classpath*:config/globals.properties</value>
+				<value>classpath*:config/redis.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="configProperties" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+	  <property name="properties" ref="propertyConfigurer"/>
+	</bean>
+    
+    <!-- enable autowire -->
+    <context:annotation-config />
+    
+    <!-- spring mvc -->
+    <mvc:annotation-driven/> 
+
+    <!-- enable component scanning (beware that this does not enable mapper scanning!) -->    
+    <context:component-scan base-package="com.whty" />
+</beans>

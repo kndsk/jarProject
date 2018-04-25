@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<portable-config>
+	<config-file path="config/jdbc.properties">
+		<replace key="jdbc.url">jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.2.154)(PORT = 1521))(ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.2.155)(PORT = 1522))(LOAD_BALANCE = yes)(FAILOVER = ON)(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = zjjydb)))</replace>
+		<replace key="jdbc.username">dw2</replace>
+		<replace key="jdbc.password">pass4dw2</replace>
+	</config-file>
+	
+	<config-file path="config/mongodb.properties">
+		<replace key="mongodb.host">127.0.2.129</replace>
+		<replace key="mongodb.port">27017</replace>
+		<replace key="mongodb.database">WHTY_EDU_330000</replace>
+	</config-file>
+	
+	<config-file path="config/solr.properties">
+		<replace key="solr.server.url">http://127.0.2.101:20000/solr</replace>
+	</config-file>
+</portable-config>

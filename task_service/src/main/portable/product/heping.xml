@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<portable-config>
+	<config-file path="config/jdbc.properties">
+		<replace key="jdbc.url">jdbc:oracle:thin:@10.100.10.45:1521:orcl</replace>
+		<replace key="jdbc.username">dw</replace>
+		<replace key="jdbc.password">pass4dw</replace>
+	</config-file>
+	
+	<config-file path="config/solr.properties">
+		<replace key="solr.server.url">http://192.168.53.26:20000/solr</replace>
+	</config-file>
+</portable-config>

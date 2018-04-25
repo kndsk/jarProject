@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<bean id="jedisManager" class="com.whty.util.JedisManager">
+		<property name="jedisPool" ref="jedisPool" />
+	</bean>
+
+	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+		<constructor-arg name="poolConfig" ref="jedisPoolConfig"/>
+		<constructor-arg name="host" type="java.lang.String" value="${redis.host}"/>
+		<constructor-arg name="port" value="${redis.port}"/>
+	</bean>
+	<!-- jedis配置 -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<!-- 最小空闲数：低于minIdle时，将创建新的连接 -->
+		<property name="minIdle" value="${redis.minIdle}"/>
+		<!-- 最大空闲数：空闲连接数大于maxIdle时，将进行回收 -->
+		<property name="maxIdle" value="${redis.maxIdle}"/>
+
+		<property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+	</bean>
+
+	
+
+</beans>

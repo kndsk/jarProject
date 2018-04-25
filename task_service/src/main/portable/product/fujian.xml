@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<portable-config>
+	<config-file path="config/jdbc.properties">
+		<replace key="jdbc.url">jdbc:oracle:thin:@10.100.10.45:1521:orcl</replace>
+		<replace key="jdbc.username">dw</replace>
+		<replace key="jdbc.password">pass4dw</replace>
+	</config-file>
+	
+	<config-file path="config/mongodb.properties">
+		<replace key="mongodb.host">10.100.10.43</replace>
+		<replace key="mongodb.port">30000</replace>
+		<replace key="mongodb.database">WHTY_EDU_350000</replace>
+	</config-file>
+	
+	<config-file path="config/solr.properties">
+		<replace key="solr.server.url">http://10.100.10.6:20000/solr</replace>
+	</config-file>
+</portable-config>
